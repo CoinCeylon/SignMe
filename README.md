@@ -1,65 +1,67 @@
-# cert_verifier_contract
+# SignMe - Cardano Certificate Verification dApp (UniHack 2025) #
 
-Write validators in the `validators` folder, and supporting functions in the `lib` folder using `.ak` as a file extension.
+## Team: BlockchainX
 
-```aiken
-validator my_first_validator {
-  spend(_datum: Option<Data>, _redeemer: Data, _output_reference: Data, _context: Data) {
-    True
-  }
-}
-```
+### Project Overview
+***SignMe** is a cool app from **BlockchainX** that lets free course providers upload a **reference certificate** to the Cardano blockchain. This means that once users finish their free courses, they can easily upload their certificates for on-chain verification and even get them minted as NFTs.*
 
-## Building
+---
 
-```sh
-aiken build
-```
+### Program Flow (Detailed Explanation)
+*Below is a **clear, detailed step-by-step flow** describing how SignMe works:*
 
-## Configuring
+### 1) Institute Uploads NFT Reference Certificate
+*Institutes offering free courses mint and upload a **reference certificate NFT** to the Cardano blockchain. This NFT contains hidden header data and secret encrypted metadata used later for validation.*
 
-**aiken.toml**
-```toml
-[config.default]
-network_id = 41
-```
+### 2) User Uploads Their Certificate
+*Users who complete these free courses receive certificates from the institute. They then upload their certificate via the SignMe dApp frontend.*
 
-Or, alternatively, write conditional environment modules under `env`.
+### 3) dApp Hashes Metadata & Hidden Headers
+*SignMe extracts and hashes the invisible headers, secret fields, and metadata of the uploaded certificate locally in the browser before uploading to the blockchain.*
 
-## Testing
+### 4) Smart Contract Compares Against Reference NFT
+*The Aiken smart contract on Cardano retrieves the reference NFT’s stored hashes and metadata and compares them with the hashes generated from the user-uploaded certificate to confirm authenticity.*
 
-You can write tests in any module using the `test` keyword. For example:
+### 5) API Verification with the Institute
+*If the hashes match, the app connects to the **institute’s API** to verify that:*
+*- The user exists in their system.
+*- The user has completed the specific free course.*
+*This adds an extra layer of validation beyond hash comparison.*
 
-```aiken
-use config
+### 6) Minting NFT Certificate on Cardano
+*Once validated, the dApp triggers the minting of a **certificate NFT** on Cardano for the user, making the credential permanently verifiable and accessible on-chain.*
 
-test foo() {
-  config.network_id + 1 == 42
-}
-```
+### 7) Micro-Payment to Institute
+*A small portion of the minting fee is automatically transferred to the institute’s wallet as a micro-payment, enabling sustainability and allowing institutes to upload additional reference certificates for future students.*
 
-To run all tests, simply do:
+---
 
-```sh
-aiken check
-```
+### Current Status
+**Note:** Due to the limited timeframe provided by the hackathon, we were unable to fully complete the entire code flow, including the frontend UI and finalisation of NFT minting. The current repository includes:
+- Aiken smart contract for certificate verification logic.
+- Deployment instructions for Cardano testnet.
+- Documentation explaining the architecture and program flow for future completion.
 
-To run only tests matching the string `foo`, do:
+We plan to continue developing SignMe post-hackathon to deliver a complete and functional product.
 
-```sh
-aiken check -m foo
-```
+---
 
-## Documentation
+### Demo Video
+You can view the **demonstration video here:**
 
-If you're writing a library, you might want to generate an HTML documentation for it.
+[https://drive.google.com/drive/folders/19w8gaqqlU4b0vF2i1sgm8eleeZqe2P3c?usp=sharing](https://drive.google.com/drive/folders/19w8gaqqlU4b0vF2i1sgm8eleeZqe2P3c?usp=sharing)
 
-Use:
+---
 
-```sh
-aiken docs
-```
+### Deployment Instructions
+For detailed step-by-step deployment instructions, testnet wallet setup, and Cardano CLI commands, refer to the documentation within this repository.
 
-## Resources
+---
 
-Find more on the [Aiken's user manual](https://aiken-lang.org).
+### Contributing
+Feel free to fork it and make it better, or hit me up if you want to team up to help **SignMe** take off in the real world for verifying free course certificates on Cardano. Let’s make it happen!
+
+---
+
+### License
+This project is licensed under the **Apache 2.0 License** for open, transparent contribution and use.
